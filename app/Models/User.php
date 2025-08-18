@@ -89,5 +89,9 @@ public function isFollowing($userId)
     return $this->following()->where('following_id', $userId)->exists();
 }
 
+public function conversations()
+{
+    return $this->belongsToMany(Conversation::class, 'conversation_user');
+}
 
 }

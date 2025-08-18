@@ -78,6 +78,18 @@ Route::group(["middleware"=> "auth"], function () {//17
     Route::get('/profile/{user}/following', [ProfileController::class, 'following'])
     ->name('profile.following');
 
+    //  #DM (Direct Messages)
+    Route::get('/conversations', [\App\Http\Controllers\ConversationController::class, 'index'])
+        ->name('conversations.index');
+    Route::post('/conversations/store', [\App\Http\Controllers\ConversationController::class, 'store'])
+        ->name('conversations.store');
+    Route::get('/conversations/{conversation}', [\App\Http\Controllers\ConversationController::class, 'show'])
+        ->name('conversations.show');
+
+    Route::post('/conversations/{conversation}/messages', [\App\Http\Controllers\MessageController::class, 'store'])
+        ->name('messages.store');
+
+
 
 });
 
