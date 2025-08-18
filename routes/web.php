@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 
 Auth::routes();
 
-Route::group(["middleware"=> "auth"], function () {
+Route::group(["middleware"=> "auth"], function () {//17
     Route::get('/',[HomeController::class,'index'])->name("index");//Akane
     Route::get('/people',[HomeController::class,'search'])->name("search");
 
