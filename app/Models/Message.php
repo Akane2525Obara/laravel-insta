@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Message extends Model
 {
-     protected $fillable = ['conversation_id', 'sender_id', 'body', 'read_at'];
+    use HasFactory;
+   protected $fillable = ['conversation_id','sender_id','body'];
+
 
     public function conversation()
     {
@@ -15,6 +18,6 @@ class Message extends Model
 
     public function sender()
     {
-        return $this->belongsTo(User::class, 'sender_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
