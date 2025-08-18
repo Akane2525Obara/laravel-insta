@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::group(["middleware"=> "auth"], function () {
     Route::get('/',[HomeController::class,'index'])->name("index");//Akane
-    Route::get('/people',[HomeController::class,'search'])->name("search");
+    Route::get('/people',[HomeController::class,'search'])->name("search"); //Shinya
 
 
     Route::group(['prefix'=> "admin",'as' => 'admin.', 'middleware'=> 'admin'], function () 
