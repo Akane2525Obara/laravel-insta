@@ -17,8 +17,6 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-
-            $table->unique(['user_id','post_id']);
         });
     }
 

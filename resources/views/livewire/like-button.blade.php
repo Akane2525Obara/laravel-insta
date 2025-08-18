@@ -4,7 +4,7 @@
 
 <span class="d-inline-flex align-items-center gap-1">
     @if (!$isLoggedIn)
-        <a href="{{ route('login') }}" class="text-muted small">ログインして「いいね」</a>
+        <a href="{{ route('login') }}" class="text-muted small">Log in to like</a>
     @else
         <button wire:click="toggle" wire:loading.attr="disabled" class="btn btn-sm shadow-none p-0"
             aria-label="like button">
