@@ -65,6 +65,16 @@
                                 <a href="{{ route('index') }}" class="nav-link"><i class="fa-solid fa-house text-dark icon-sm"></i></a>
                             </li>
 
+                          {{-- Direct Messages --}}
+                            <li class="nav-item" title="Messages">
+                                <a href="{{ route('conversations.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-envelope text-dark icon-sm"></i>
+                                </a>
+                            </li>
+
+
+
+
                             {{-- Create Post --}}
                             <li class="nav-item" title="Create Post">
                                 <a href="{{ route('post.create') }}" class="nav-link"><i class="fa-solid fa-circle-plus text-dark icon-sm"></i></a>
