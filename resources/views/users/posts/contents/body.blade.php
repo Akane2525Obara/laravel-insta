@@ -8,25 +8,7 @@
     {{-- heart button + no. of likes + categories --}}
     <div class="row align-items-center">
         <div class="col-auto">
-            @if ($post->isLiked())
-                <form action="{{ route('like.destroy', $post->id) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm shadow-none p-0">
-                        <i class="fa-solid fa-heart text-danger"></i>
-                    </button>
-                </form>
-            @else
-                <form action="{{ route('like.store', $post->id) }}" method="post">
-                    @csrf
-                    <button type="submit" class="btn btn-sm shadow-none p-0">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </form>
-            @endif
-        </div>
-        <div class="col-auto px-0">
-            <span>{{ $post->likes->count() }}</span>
+            <livewire:like-button :post="$post" />
         </div>
         <div class="col text-end">
             @foreach ($post->categoryPost as $category_post)

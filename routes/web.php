@@ -19,7 +19,7 @@ Route::group(["middleware"=> "auth"], function () {//17
     Route::get('/people',[HomeController::class,'search'])->name("search"); //Shinya
 
 
-    Route::group(['prefix'=> "admin",'as' => 'admin.', 'middleware'=> 'admin'], function () 
+    Route::group(['prefix'=> "admin",'as' => 'admin.', 'middleware'=> 'admin'], function ()
     {
         // #USERS
         Route::get('/users', [UsersController::class,'index'])->name('users');
@@ -28,20 +28,14 @@ Route::group(["middleware"=> "auth"], function () {//17
 
         // #POSTS
         Route::get('/posts', [PostsController::class,'index'])->name('posts');
-          Route::delete('/posts/{id}/hide', [PostsController::class,'hide'])->name('posts.hide');
+        Route::delete('/posts/{id}/hide', [PostsController::class,'hide'])->name('posts.hide');
         Route::patch('/posts/{id}/unhide', [PostsController::class,'unhide'])->name('posts.unhide');
-
 
        // #Categories
         Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
-         Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
+        Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
         Route::patch('/categories/{id}/update', [CategoriesController::class, 'update'])->name('categories.update');
         Route::delete('/categories/{id}/delete', [CategoriesController::class, 'destroy'])->name('categories.delete');
-       
-
-
-
-
     });
 
     #POSTS
@@ -54,31 +48,23 @@ Route::group(["middleware"=> "auth"], function () {//17
 
     #COMMENTS
     Route::post('/comment/{post_id}/store', [CommentController::class,'store'])->name('comment.store');
-     Route::delete('/comment/{comment_id}/destroy', [CommentController::class,'destroy'])->name('comment.destroy');
+    Route::delete('/comment/{comment_id}/destroy', [CommentController::class,'destroy'])->name('comment.destroy');
 
-     #PROFILE
-     Route::get('/profile/{id}/show', [ProfileController::class,'show'])->name('profile.show');
-     Route::get('/profile/edit', [ProfileController::class,'edit'])->name('profile.edit');
+    #PROFILE
+    Route::get('/profile/{id}/show', [ProfileController::class,'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class,'edit'])->name('profile.edit');
 
-     Route::patch('/profile/{id}/update', [ProfileController::class,
-     'update'])->name('profile.update');
+    Route::patch('/profile/{id}/update', [ProfileController::class,'update'])->name('profile.update');
 
-    //  #LIKE
-     Route::post('/like/{post_id}/store', [LikeController::class,
-     'store'])->name('like.store');
-      Route::delete('/like/{post_id}/destroy', [LikeController::class,
-     'destroy'])->name('like.destroy');
+    #LIKE
+    Route::post('/like/{post_id}/store', [LikeController::class,'store'])->name('like.store');
+    Route::delete('/like/{post_id}/destroy', [LikeController::class,'destroy'])->name('like.destroy');
 
-    //  #FOLLOW
-     Route::post('/follow/{user_id}/store', [FollowController::class,
-     'store'])->name('follow.store');
-     Route::delete('/follow/{user_id}/destroy', [FollowController::class,
-     'destroy'])->name('follow.destroy');
-     Route::get('/profile/{id}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
-    Route::get('/profile/{user}/following', [ProfileController::class, 'following'])
-    ->name('profile.following');
-
-
+    #FOLLOW
+    Route::post('/follow/{user_id}/store', [FollowController::class,'store'])->name('follow.store');
+    Route::delete('/follow/{user_id}/destroy', [FollowController::class,'destroy'])->name('follow.destroy');
+    Route::get('/profile/{id}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
+    Route::get('/profile/{user}/following', [ProfileController::class, 'following'])->name('profile.following');
 });
 
 

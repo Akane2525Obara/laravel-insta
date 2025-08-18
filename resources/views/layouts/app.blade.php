@@ -17,6 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @livewireStyles   {{-- LivewireのCSS --}}
 </head>
 <body>
     <div id="app">
@@ -145,5 +146,7 @@
             </div>
         </main>
     </div>
+
+    @livewireScripts  {{-- LivewireのJS --}}
 </body>
 </html>
