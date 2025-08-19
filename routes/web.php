@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
+// use App\Http\Controllers\StoryController;//sota-story
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
 
 
@@ -17,6 +18,14 @@ Auth::routes();
 Route::group(["middleware"=> "auth"], function () {//17
     Route::get('/',[HomeController::class,'index'])->name("index");//Akane
     Route::get('/people',[HomeController::class,'search'])->name("search"); //Shinya
+
+    
+    //sota-story-add
+//     Route::middleware('auth')->group(function () {
+//     Route::post('/stories', [StoryController::class, 'store'])->name('stories.store'); 
+//     Route::get('/stories/{story}', [StoryController::class, 'show'])->name('stories.show'); 
+
+// });
 
 
     Route::group(['prefix'=> "admin",'as' => 'admin.', 'middleware'=> 'admin'], function () 
@@ -28,20 +37,16 @@ Route::group(["middleware"=> "auth"], function () {//17
 
         // #POSTS
         Route::get('/posts', [PostsController::class,'index'])->name('posts');
-          Route::delete('/posts/{id}/hide', [PostsController::class,'hide'])->name('posts.hide');
+        Route::delete('/posts/{id}/hide', [PostsController::class,'hide'])->name('posts.hide');
         Route::patch('/posts/{id}/unhide', [PostsController::class,'unhide'])->name('posts.unhide');
 
 
        // #Categories
         Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
-         Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
+        Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
         Route::patch('/categories/{id}/update', [CategoriesController::class, 'update'])->name('categories.update');
         Route::delete('/categories/{id}/delete', [CategoriesController::class, 'destroy'])->name('categories.delete');
        
-
-
-
-
     });
 
     #POSTS
