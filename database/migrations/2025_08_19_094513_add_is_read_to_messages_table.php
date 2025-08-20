@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::table('messages', function (Blueprint $table) {
+        $table->boolean('is_read')->default(false)->after('body');
+    });
+        
     }
 
     /**
@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::table('messages', function (Blueprint $table) {
+             $table->dropColumn('is_read');
+        });
     }
 };

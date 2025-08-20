@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Conversation extends Model
 {
     use HasFactory;
-    protected $fillable = [];
+    protected $fillable = [
+         'title','is_group'
+    ];
 
     // 多対多: conversation ↔ users
     public function users()

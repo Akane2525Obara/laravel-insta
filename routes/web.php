@@ -10,6 +10,9 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
 
 
 Auth::routes();
@@ -65,25 +68,29 @@ Route::group(["middleware"=> "auth"], function () {//17
     Route::delete('/follow/{user_id}/destroy', [FollowController::class,'destroy'])->name('follow.destroy');
     Route::get('/profile/{id}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
     Route::get('/profile/{user}/following', [ProfileController::class, 'following'])->name('profile.following');
-    //  #FOLLOW
-     Route::post('/follow/{user_id}/store', [FollowController::class,
-     'store'])->name('follow.store');
-     Route::delete('/follow/{user_id}/destroy', [FollowController::class,
-     'destroy'])->name('follow.destroy');
-     Route::get('/profile/{id}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
-    Route::get('/profile/{user}/following', [ProfileController::class, 'following'])
-    ->name('profile.following');
+    
 
-    //  #DM (Direct Messages)
-    Route::get('/conversations', [\App\Http\Controllers\ConversationController::class, 'index'])
-        ->name('conversations.index');
-    Route::post('/conversations/store', [\App\Http\Controllers\ConversationController::class, 'store'])
-        ->name('conversations.store');
-    Route::get('/conversations/{conversation}', [\App\Http\Controllers\ConversationController::class, 'show'])
-        ->name('conversations.show');
+    /**
+     * DM (Conversations & Messages)
+     */
+    Route::prefix('conversations')->as('conversations.')->group(function () {
+        Route::get('/', [ConversationController::class, 'index'])->name('index');
+        Route::post('/store', [ConversationController::class, 'store'])->name('store');
+        Route::post('/start/{user}', [ConversationController::class, 'start'])->name('start');
+        Route::get('/{conversation}', [ConversationController::class, 'show'])->name('show');
 
-    Route::post('/conversations/{conversation}/messages', [\App\Http\Controllers\MessageController::class, 'store'])
-        ->name('messages.store');
+        // Messages
+        Route::post('/{conversation}/messages', [MessageController::class, 'store'])->name('messages.store');
+        Route::post('/{conversation}/messages/read', [MessageController::class, 'markAsRead'])->name('messages.read');
+        });
+            /**
+     * Notifications
+     */
+    Route::prefix('notifications')->as('notifications.')->group(function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('index'); // 通知一覧
+        Route::post('/{id}/read', [NotificationController::class, 'markAsRead'])->name('read'); // 既読
+    
+    });  
 
 
 

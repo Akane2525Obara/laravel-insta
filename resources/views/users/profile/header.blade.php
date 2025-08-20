@@ -28,7 +28,13 @@
                 <button type="submit" class="btn btn-primary btn-sm fw-bold">Follow</button>
               </form>
           @endif
-         
+          {{-- DMボタン --}}
+              <form action="{{ route('conversations.start', $user->id) }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn  btn-sm fw-bold ms-1" title="Message">
+                  <i class="fa-solid fa-message"></i>
+                </button>
+              </form>
         @endif
       </div>
     </div>
@@ -61,9 +67,10 @@
     </div>
 
     <p class="fw-bold">{{$user->introduction}}</p>
-
    
 
+
+   
 
   </div>
 </div>
