@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Admin: Posts')
@@ -24,10 +23,10 @@
                     {{-- PHOTO --}}
                     <td>
                         @if ($post->image)
-                        <a href="{{ route('post.show', $post->id) }}">
-                            <img src="{{ $post->image }}" alt="Post Image" 
-                                class="d-block mx-auto" style="width:80px; height:80px; object-fit:cover;">
-                        </a>
+                            <a href="{{ route('post.show', $post->id) }}">
+                                <img src="{{ $post->image }}" alt="Post Image" class="d-block mx-auto"
+                                    style="width:80px; height:80px; object-fit:cover;">
+                            </a>
                         @else
                             <i class="fa-solid fa-image text-secondary d-block text-center" style="font-size:40px;"></i>
                         @endif
@@ -35,7 +34,7 @@
 
                     {{-- CATEGORY --}}
                     <td>
-                       @if($post->categories->isNotEmpty())
+                        @if ($post->categories->isNotEmpty())
                             {{ $post->categories->pluck('name')->join(', ') }}
                         @else
                             <span class="text-muted">Uncategorized</span>
@@ -44,13 +43,30 @@
 
                     {{-- OWNER --}}
                     <td>
-                       <a href="{{ route('profile.show', $post->user->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('profile.show', $post->user->id) }}" class="text-decoration-none text-dark">
                             {{ $post->user->name }}
                         </a>
                     </td>
 
-                    {{-- CREATED AT --}}
-                    <td>{{ $post->created_at->format('Y-m-d H:i') }}</td>
+                    {{-- 1 CREATED AT --}}
+                    {{-- <td>{{ $post->created_at->format('Y-m-d H:i') }}</td> --}}
+
+                    {{-- 2 CREATED AT --}}
+                    {{-- <td title="{{ $post->created_at }}" class="text-muted small">
+                        {{ $post->created_at->diffForHumans() }}
+                    </td> --}}
+
+                    {{-- 3 CREATED AT --}}
+                    {{-- <td title="{{ $post->created_at }}" class="text-muted small">
+                        {{ $post->created_at->diffForHumans() }}
+                    </td> --}}
+
+                    {{-- 4 CREATED AT --}}
+                    <td class="text-muted small">
+                        {{ $post->created_at->diffForHumans() }}
+                        <br>
+                        <small>{{ $post->created_at->format('Y-m-d H:i') }}</small>
+                    </td>
 
                     {{-- STATUS --}}
                     <td>
