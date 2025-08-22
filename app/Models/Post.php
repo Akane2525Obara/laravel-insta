@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes; 
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -36,21 +36,23 @@ class Post extends Model
     }
 
     // #To get the likes of a post
-    public function likes(){
-        return $this->hasMany(Like::class); 
-            
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+
     }
 
     // #returns TRUE if the logged in user allready liked the post
-    public function isLiked(){
+    public function isLiked()
+    {
         return $this->likes()->where("user_id", Auth::user()->id)->exists();
     }
 
-   public function categories()
-{
-    return $this->belongsToMany(Category::class, 'category_post');
-}
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_post');
+    }
 
 
-
+    
 }
