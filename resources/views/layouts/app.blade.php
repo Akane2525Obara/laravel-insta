@@ -126,6 +126,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @livewireStyles   {{-- LivewireのCSS --}}
 </head>
 
 <body>
@@ -182,6 +183,16 @@
                                 <a href="{{ route('index') }}" class="nav-link"><i
                                         class="fa-solid fa-house text-body icon-sm"></i></a>
                             </li>
+
+                          {{-- Direct Messages --}}
+                            <li class="nav-item" title="Messages">
+                                <a href="{{ route('conversations.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-envelope text-dark icon-sm"></i>
+                                </a>
+                            </li>
+
+
+
 
                             {{-- Create Post --}}
                             <li class="nav-item" title="Create Post">
@@ -260,6 +271,8 @@
             </div>
         </main>
     </div>
+
+    @livewireScripts  {{-- LivewireのJS --}}
 </body>
 
 {{-- Dark mode toggle script --}}
